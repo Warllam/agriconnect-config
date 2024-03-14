@@ -1,7 +1,15 @@
 # Proprietes de l'application
 spring:
   application:
-    name: ac-actionneur # nom de l'application
+    name: ac-releve # nom de l'application
+  data:
+    mongodb:
+      host: localhost # URL mongodb
+      port: 27017
+      database: releve-db
+      username: root
+      password: admin
+      authentication-database: admin
   cloud:
     # Activation remontée management dans Eureka
     config:
@@ -13,15 +21,6 @@ spring:
     baseurl: http://localhost:9411/
     sender:
       type: web # les requêtes seront envoyés en HTTP
-  datasource:
-    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC # URL mysql
-    username: root
-    password: admin
-  jpa: # Configuration JPA
-    database-platform: org.hibernate.dialect.MySQLDialect # On va parler en MySQL
-    hibernate:
-      # NE PAS LAISSER EN PROD
-      ddl-auto: update # strategie create-drop.
 
 # Activation des endpoints pour le monitoring
 management:
@@ -56,6 +55,7 @@ eureka:
 logging:
   level:
     org.springframework.web: INFO # Choix du niveau de log affiché
+
 # Proprietes du serveur d'entreprise
 server:
-  port: 10002 # HTTP (Tomcat) port
+  port: 10004 # HTTP (Tomcat) port

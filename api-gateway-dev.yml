@@ -12,29 +12,36 @@ spring:
           # car le nom des services est en minuscule dans l'URL
       # Configuration des routes de l'API Gateway
       routes:
-        #Service CLIENTS-SERVICE
-        - id: capteur-service
-          uri: lb://ac-capteur/ #Attention : lb et pas HTTP. Lb est prêt pour faire du load-balancing
+        #Service ACTIONNEUR
+        - id: actionneur-service
+          uri: lb://ac-actionneur/ #Attention : lb et pas HTTP. Lb est prêt pour faire du load-balancing
           predicates:
             # On matche tout ce qui commence par /api/clients
-            - Path=/api/capteurs/**
+            - Path=/api/actionneur/**
           filters:
             # On va réécrire l'URL pour enlever le /api/client
             - RewritePath=/api/capteur(?<segment>/?.*), /$\{segment}
-        #Service COMPTES-SERVICE
-        - id: actionneur-service
-          uri: lb://ac-actionneur/
+        #Service CAPTEUR
+        - id: capteur-service
+          uri: lb://ac-capteur/
           predicates:
-            - Path=/api/actionneurs/**
+            - Path=/api/capteur/**
           filters:
             - RewritePath=/api/actionneurs(?<segment>/?.*), /$\{segment}
-        #Service CLIENTS-COMPTES
-        - id: clients-comptes
-          uri: lb://amccomposite/
+        #Service CAPTEUR-ACTIONNEUR
+        - id: capteur-actionneur-composite
+          uri: lb://ac-composite-capteur-actionneur/
           predicates:
-            - Path=/api/clientscomptes/**
+            - Path=/api/capteuractionneur/**
           filters:
-            - RewritePath=/api/clientscomptes(?<segment>/?.*), /$\{segment}
+            - RewritePath=/api/capteuractionneur(?<segment>/?.*), /$\{segment}
+          #Service CAPTEUR-RELEVE
+        - id: capteur-releve-composite
+          uri: lb://ac-composite-capteur-releve/
+          predicates:
+            - Path=/api/capteurreleve/**
+          filters:
+            - RewritePath=/api/capteurreleve(?<segment>/?.*), /$\{segment}
       enabled: on # Activation gateway
     # Activation remontée management dans Eureka
     config:

@@ -16,7 +16,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC # URL mysql
     username: root
-    password: my-secret-pw
+    password: admin
   jpa: # Configuration JPA
     database-platform: org.hibernate.dialect.MySQLDialect # On va parler en MySQL
     hibernate:
@@ -58,4 +58,4 @@ logging:
     org.springframework.web: INFO # Choix du niveau de log affiché
 # Proprietes du serveur d'entreprise
 server:
-  port: 10011 # HTTP (Tomcat) port
+  port: 10003 # HTTP (Tomcat) port
