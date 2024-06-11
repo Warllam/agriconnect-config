@@ -11,8 +11,8 @@ spring:
             server:
                 git:
                     uri: https://github.com/Eliott-Tixier/agriconnect-config-files.git
-                    username: Eliott-Tixier
-                    password: pwd
+                    username: myUsr
+                    password: myMdp
                     clone-on-start: true
 
 # Configuration client de l'annuaire
